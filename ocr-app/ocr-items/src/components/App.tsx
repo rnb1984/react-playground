@@ -1,11 +1,10 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 
-import store from '../store';
+
 import FormPage from '../containers/FormContainer';
 
 // import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 
 interface IProps {
   showContent?: boolean
