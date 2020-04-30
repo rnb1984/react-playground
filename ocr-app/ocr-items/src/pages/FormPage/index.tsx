@@ -6,15 +6,17 @@ import ListItems from '../../components/ListItems';
 import UploadImage from '../../components/UploadImage';
 import { postImageFile } from '../../services/apiService';
 import TakePhoto from '../../components/TakePhoto';
+import { Card, CardContent, CardActions, CardHeader, IconButton, Avatar } from '@material-ui/core';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 type Props = IStateProps;
 
 export interface IStateProps {
-  itemsView: IItem [];
-  itemsEdit: IItem [];
+  itemsView: IItem[];
+  itemsEdit: IItem[];
   hasUpdated?: boolean;
   fileFormValues: IFileForm;
-  // saveChanges: any
 };
 
 
@@ -22,7 +24,7 @@ class FormPage extends React.Component<Props>  {
 
   public componentWillMount() {
     setNewEditableITems(this.props.itemsView);
-    console.log("Mounting ", this.props.itemsView, this.props.itemsEdit)
+    console.log("Mounting ", this.props.itemsView, this.props.itemsEdit);
   }
 
 
@@ -32,7 +34,6 @@ class FormPage extends React.Component<Props>  {
       itemsEdit,
       hasUpdated,
       fileFormValues
-      // saveChanges,
     } = this.props;
 
     console.log("Form Page itemsEdit", itemsEdit)
@@ -42,22 +43,38 @@ class FormPage extends React.Component<Props>  {
     }
     return (
       <div>
-        <h1>All my items</h1>
+        <Card>
+          <CardHeader
+            title={"All my items"}
+            subheader={"Take or upload picture"}
+            avatar={
+              <ShoppingCartIcon/>
+                }
+            action={
+              <IconButton aria-label="settings">
+                <MoreVertIcon />
+              </IconButton>}
+          />
+          <CardContent>
+          <TakePhoto
+              showCamera={false}
+            />
+          </CardContent>
+          <CardActions>
+            <UploadImage
+              onSelectHandle={onUploadImageHandle}
+            /> 
+          </CardActions>
+
+        </Card>
         <ListItems
+          title={"Item List"}
           items={itemsEdit}
-        />
-        <TakePhoto
-          showCamera={false}
-        />
-        <UploadImage
-          title="Items"
-          updated={hasUpdated}
-          onSelectHandle={onUploadImageHandle}
         />
       </div>
     )
   }
-}
+};
 
 
 const onUploadImageHandle = (event: React.FormEvent<HTMLInputElement | HTMLFormElement>) => {

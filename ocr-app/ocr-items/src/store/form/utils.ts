@@ -1,23 +1,63 @@
-import { IItem, IAllItems } from "./constants";
+import { IItem } from "./constants";
+import { tagTypeList, timeTypeList } from '../../components/Dropdown/Lists';
 
 
-// Create new list of Items from string of names 
+/**
+ * Create new list of Items from string of names 
+ */
 export const creatNewItemsList = (listOfNames: string[]) => {
     const newItems: IItem[] = [];
     let index = listOfNames.length;
 
-    listOfNames.forEach(element => {
+    listOfNames.forEach(name => {
         index = index + 1;
-        newItems.push({
-            index: "" + index,
-            name: element,
-            type: "unkown",
-            date: "now",
-            amount: 100
-        })
+        const foundType = findType(name);
+        const nameIndex = findItemByName(name, newItems);
+
+        if (nameIndex === null)
+            newItems.push({
+                index: "" + index,
+                name,
+                type: foundType,
+                date: findTime(foundType, 0),
+                amount: 100,
+                number: 1
+            });
+        else
+            newItems[nameIndex].number = newItems[nameIndex].number! + 1;
     });
+
     return newItems;
 }
+
+// Find Time
+export const findTime = (newType: string, defaultTime: number) => {
+    let timeFound = defaultTime;
+    timeTypeList().forEach(timeType => {
+        if (timeType.label.toLowerCase() === newType.toLowerCase())
+            timeFound = timeType.value
+    });
+    return timeFound;
+}
+
+// Find Type
+const findType = (name: string) => {
+    let foundType: string = "Unkown";
+    const names: string[] = []
+    name.split(" ").forEach(n => {
+        names.push(n.toLowerCase())
+    });
+    tagTypeList().forEach(item => {
+        item.tags.forEach(tag => {
+            if (names.includes(tag))
+                foundType = item.label;
+        })
+    }
+    );
+    console.log("\n\nNAMES", names, foundType, "\n\n")
+    return foundType;
+}
+
 
 export const findItemByName = (name: string, items: IItem[]): number | null => {
     if (items.length < 1)

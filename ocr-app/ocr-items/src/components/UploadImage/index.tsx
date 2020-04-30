@@ -1,23 +1,30 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
+import { Button } from '@material-ui/core';
 
 interface IProps {
-    title: string;
-    updated?: boolean;
     onSelectHandle: (event: React.FormEvent<HTMLInputElement | HTMLFormElement>) => any;
 }
 
 export default React.memo<IProps>((props: IProps) => {
     const {
-        title,
-        updated,
         onSelectHandle
     } = props
-
+    const css: CSSProperties = {display: 'none'};
     return (
         <div>
-            <h3>{title} is {updated ? "Update" : "Not Updated"}</h3>
-                <h3>File Upload</h3>
-                <input type="file" name="image" placeholder="Upload image" onInput={onSelectHandle}/>
+            <input
+                accept="image/*"
+                id="contained-button-file"
+                style={css}
+                multiple
+                type="file"
+                name="image"
+                onInput={onSelectHandle}
+            />
+            <label htmlFor="contained-button-file">
+                <Button component="span">
+                    Upload</Button>
+            </label>
         </div>
     )
 });

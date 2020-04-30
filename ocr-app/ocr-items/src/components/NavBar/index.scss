@@ -1,0 +1,19 @@
+
+.navbar{
+  &_appBar {
+    top:  auto !important;
+    bottom : 0 !important; 
+  }
+  &_grow {
+    flex-grow: 1;
+  }
+&_fabButton {
+    position: absolute !important; 
+    z-index: 1;
+    top: -30px; 
+    left: 0;
+    right: 0;
+    margin: 0 auto !important; 
+  }
+}
+

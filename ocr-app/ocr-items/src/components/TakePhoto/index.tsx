@@ -4,9 +4,13 @@ import 'react-html5-camera-photo/build/css/index.css';
 import { API_ENDPOINT } from '../../store/form/constants';
 import { postImageFile } from '../../services/apiService';
 import { createBlobFromdataURI } from '../../services/dataTransformService';
+import IconButton from '@material-ui/core/IconButton';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import { Grid } from '@material-ui/core';
 
 
 export interface IProps {
+  position?: string;
   showCamera: boolean;
 };
 
@@ -23,18 +27,24 @@ const onTakePhoto = async (dataUri: any) => {
 
 export default React.memo<IProps>((props: IProps) => {
   const {
+    position,
     showCamera
   } = props;
   const height = 640; // 480
   const width = 480; // 640
   const css: CSSProperties = { width, height, overflow: "hidden" }
-  const [showCam, setShowCam] = useState(1)
+  const [showCam, setShowCam] = useState(showCamera? 0: 1);
   return (
-    <div className="camera-container">
-      <h3>Camera Time</h3>
-      <button onClick={() => setShowCam(showCam + 1)}> {isOpen(showCam)? "Close" : "Open"} Camera</button>
+    <Grid container={true} className="camera-container">
+      <Grid item={true} xs={12}>
+      <IconButton  color={isOpen(showCam) ? "secondary" : "primary" }  component="span" onClick={() => setShowCam(showCam + 1)} >
+          <PhotoCamera />
+        </IconButton>
+        </Grid>
       {isOpen(showCam) &&
+      <Grid item={true} xs={12}>
         <div style={css}>
+          
           <Camera
             onTakePhoto={(dataUri: File) => { onTakePhoto(dataUri); }}
             onCameraError={(error: any) => { onCameraError(error); }}
@@ -51,12 +61,14 @@ export default React.memo<IProps>((props: IProps) => {
             onCameraStart={(stream: any) => { onCameraStart(stream); }}
             onCameraStop={() => { onCameraStop(); }}
           />
-        </div>}
-    </div>
+          
+        </div>
+        </Grid>}
+    </Grid>
   );
 });
 
-const isOpen = (x:number):boolean => (x%2===0) ;
+const isOpen = (x: number): boolean => (x % 2 === 0);
 
 // Cammera handling
 const onCameraError = (error: DOMException) => {

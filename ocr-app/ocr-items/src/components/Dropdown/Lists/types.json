@@ -1,0 +1,90 @@
+{
+    "meat": [
+        {
+            "value": "poltuary",
+            "label": "Poltuary",
+            "time" : 7,
+            "tags" : ["chicken", "drumstick"]
+        },
+        {
+            "value": "beef",
+            "label": "Beef",
+            "time" : 7,
+            "tags" : ["beef", "cow", "steak", "burger"]
+        },
+        {
+            "value": "pork",
+            "label": "Pork",
+            "time" : 7,
+            "tags" : ["pork", "pig", "sasuages"]
+        },
+        {
+            "value": "lamb",
+            "label": "Lamb",
+            "time" : 7,
+            "tags" : ["lamb", "sheep"]
+        },
+        {
+            "value": "veal",
+            "label": "Veal",
+            "time" : 7,
+            "tags" : ["veal"]
+        },
+        {
+            "value": "turkey",
+            "label": "Turkey",
+            "time" : 7,
+            "tags" : ["turkey"]
+        },
+        {
+            "value": "fish",
+            "label": "Fish",
+            "time" : 5,
+            "tags" : ["fish", "mackerel","salmon", "harbour", "sea"]
+        }
+    ],
+    "dairy": [
+        {
+            "value": "milk",
+            "label": "Milk",
+            "time" : 7,
+            "tags" : ["milk", "shake"]
+        },
+        {
+            "value": "egg",
+            "label": "Egg",
+            "time" : 7,
+            "tags" : ["egg"]
+        },
+        {
+            "value": "cheese",
+            "label": "Cheese",
+            "time" : 7,
+            "tags" : ["cheese", "brie", "cheddar", "mozzarella"]
+        },
+        {
+            "value": "yogurt",
+            "label": "Yogurt",
+            "time" : 14,
+            "tags" : ["yogurt", "greek"]
+        },
+        {
+            "value": "cream",
+            "label": "Cream",
+            "time" : 7,
+            "tags" : ["cream"]
+        },
+        {
+            "value": "ice-cream",
+            "label": "Ice-Cream",
+            "time" : 30,
+            "tags" : ["ice-cream", "icecream", "ben and jerry", "häagen", "haagen","dazs"]
+        },
+        {
+            "value": "butter",
+            "label": "Butter",
+            "time" : 30,
+            "tags" : ["butter", "spread"]
+        }
+    ]
+}
