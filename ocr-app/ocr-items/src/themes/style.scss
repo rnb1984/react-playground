@@ -1,5 +1,9 @@
 @import 'colours.scss';
 
+
+$error-colour: $red;
+$success-colur: $primary;
+
 @mixin base-typeface {
     color: $dark;
   }

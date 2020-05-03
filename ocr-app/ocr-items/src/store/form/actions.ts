@@ -16,7 +16,7 @@ export const setNewEditableITems =  (items: IItem []) => store.dispatch({
 });
 
 
-export const editItemsPending = () => ({
+export const editItemsPending = () => store.dispatch({
   type: constants.EDIT_ITEMS_PENDING,
 });
 

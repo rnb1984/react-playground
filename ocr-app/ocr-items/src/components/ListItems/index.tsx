@@ -1,10 +1,11 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import { IItem } from "../../store/form/constants";
 import { editItemSuccess, removeItems } from '../../store/form/actions';
 import ItemInput from '../ItemInput';
 import { timeTypeList } from '../Dropdown/Lists';
 import { findTime } from '../../store/form/utils';
-import { Card, ExpansionPanel, ExpansionPanelDetails, Typography, ExpansionPanelSummary, List, ListItem } from '@material-ui/core';
+import {  List } from '@material-ui/core';
+import { showSnackbar } from '../../store/snackbar/actions';
 
 
 interface IProps {
@@ -54,7 +55,7 @@ const handleNameChange = (item: IItem) => (event: React.ChangeEvent<HTMLInputEle
 
 const handleTypeChange = (item: IItem) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 
-    const newType: string = event.target.value;
+    const newType: string = event.target.value.toLowerCase();
 
     const newTime = findTime(newType, 10000);
 
@@ -85,4 +86,5 @@ const handleNumberChange = (item: IItem) => (event: React.ChangeEvent<HTMLInputE
 
 const onDeleteHandle = (item: IItem) => (event: React.MouseEvent<HTMLButtonElement>) => {
     removeItems(item);
+    showSnackbar("Successfully Delete: " + item.name.toUpperCase() );
 }

@@ -7,12 +7,27 @@ import { IAllItems } from "./form/constants";
 import { IFileForm } from "./file/constants";
 import { RouteComponentProps } from 'react-router-dom';
 import Reducer from '../redux/Reducer';
+import { IStoredAction } from './stores/actions';
+import { IStores } from './stores/constants';
+import { IBinAction } from './bin/actions';
+import { IBins } from './bin/constants';
+import { ISnackbarActions, ISnackbarState } from './snackbar/constants';
 
 
 const initialState = {
   form: {},
   items: {},
-  fileForm:{}
+  stores: {
+    items: [],
+    stores: [],
+  },
+  snackbar:{ open: false,
+    message: ""},
+  fileForm:{},
+  bin: {
+    items: [],
+    bins: []
+  }
 }
 
 export const history: History = createBrowserHistory()
@@ -32,7 +47,7 @@ export default createStore<IState, IActions, {}, {}>(
 
 export type IActions = Action<undefined> |
 IFileFormAction|
-  IItemsAction 
+  IItemsAction | IStoredAction | IBinAction | ISnackbarActions
   
 
 export interface IState {
@@ -43,5 +58,8 @@ export interface IState {
     view: IAllItems;
     edit: IAllItems;
   }>;
+  stores: IStores;
+  snackbar: ISnackbarState;
+  bin: IBins;
   router?: RouteComponentProps;
 };

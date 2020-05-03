@@ -16,12 +16,13 @@ export const creatNewItemsList = (listOfNames: string[]) => {
 
         if (nameIndex === null)
             newItems.push({
-                index: "" + index,
+                index: index + "-" + name,
                 name,
-                type: foundType,
+                type: foundType.toLowerCase(),
                 date: findTime(foundType, 0),
                 amount: 100,
-                number: 1
+                number: 1,
+                stored: findStorage(foundType)
             });
         else
             newItems[nameIndex].number = newItems[nameIndex].number! + 1;
@@ -42,7 +43,7 @@ export const findTime = (newType: string, defaultTime: number) => {
 
 // Find Type
 const findType = (name: string) => {
-    let foundType: string = "Unkown";
+    let foundType: string = "unknown";
     const names: string[] = []
     name.split(" ").forEach(n => {
         names.push(n.toLowerCase())
@@ -58,7 +59,15 @@ const findType = (name: string) => {
     return foundType;
 }
 
+// Find Storage
+const findStorage = (newType: string) => {
+    if (newType.toLowerCase() === "unknown")
+        return "cupboard";
+    else
+        return "fridge";
+}
 
+// find Items
 export const findItemByName = (name: string, items: IItem[]): number | null => {
     if (items.length < 1)
         return null

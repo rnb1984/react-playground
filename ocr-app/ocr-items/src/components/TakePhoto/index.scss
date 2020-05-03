@@ -3,3 +3,8 @@
     width: 100% !important; 
   }
 
+.camera{
+    &_on{
+        z-index: 1;
+    }
+}

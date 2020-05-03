@@ -1,0 +1,9 @@
+@import '../../themes/style.scss';
+
+.header{
+    color: $dark;
+    &_image{
+        padding: 25px;
+        color: $primary;
+    }
+}

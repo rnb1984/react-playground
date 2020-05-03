@@ -1,6 +1,9 @@
-@import 'TakePhoto/index';
+@import './TakePhoto/index.scss';
 @import '../themes/style.scss';
-@import '../components/NavBar/index';
+@import '../components/NavBar/index.scss';
+@import '../components/Header/index.scss';
+@import '../components/SnackBarMessage/index';
+@import '../components/Footer/index';
 
 .App {
   text-align: center;

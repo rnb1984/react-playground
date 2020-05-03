@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { IItem } from '../../store/form/constants';
 import Dropdown from '../Dropdown';
@@ -30,7 +29,6 @@ export default React.memo<IProps>((props: IProps) => {
 
   return (
     <Card>
-
       <CardHeader
       title={props.item.name}
       subheader={currDate.toUTCString()}

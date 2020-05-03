@@ -9,7 +9,7 @@ const initialState: IAllItems = {
     {
       index: "0",
       name: "intitial",
-      type: "unkown",
+      type: "unknown",
       date: 0,
       amount: 100,
       number: 1
@@ -38,8 +38,6 @@ export const viewReducer = (state: IAllItems = initialState, action: IActions): 
 
 export const editReducer = (state: IAllItems = initialState, action: IActions):
   IAllItems => {
-  console.log("state", state);
-  console.log("In editReducer with: ", action.type)
   switch (action.type) {
     case ItemsTypeEnum.ADD_ITEMS:
       return {

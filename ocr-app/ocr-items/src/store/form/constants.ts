@@ -22,6 +22,7 @@ export enum ItemsTypeEnum {
     date: number;
     amount: number;
     number?: number;
+    stored?: string;
   }
   export interface IAllItems {
     items: IItem[];

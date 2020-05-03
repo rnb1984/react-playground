@@ -6,7 +6,7 @@ import { IDropDownValue } from '../index';
  *  Dropdown Lists
 */
 export const dropdownTypesList = () => {
-    const ddList: IDropDownValue[] = createDropDownList(types.dairy, [{ value: "null", label: "Unknown" }]);
+    const ddList: IDropDownValue[] = createDropDownList(types.dairy, [{ value: "unknown", label: "Unknown" }]);
     return createDropDownList(types.meat, ddList);
 };
 
@@ -71,4 +71,31 @@ const createTagTypeList = (existingList: any[], ttList: ITagTypeValue[]) => {
         )
     });
     return ttList;
+}
+
+
+/**
+ * Dict of Types
+*/
+interface IIndexedTypeDict {
+    [id: string ]: string
+} 
+
+export const typeIndexedDict = () => {
+    const itDict: IIndexedTypeDict = createIndexedTypeDict(types.dairy, {"unknown": "Unknown" }, 1);
+    return createIndexedTypeDict(types.meat, itDict, types.dairy.length + 1);
+}
+
+const createIndexedTypeDict = (existingList: any[], itDict: IIndexedTypeDict, index: number) => {
+    existingList.forEach((item, i) => {
+        itDict[item.value] = item.label;
+    });
+    return itDict;
+}
+
+/**
+ * Dict of Storage
+*/
+export const storageDict = () => {
+    return { 'fridge': 'Fridge', 'cupboard': 'Cupboard' };
 }

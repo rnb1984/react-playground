@@ -6,14 +6,14 @@ import { postImageFile } from '../../services/apiService';
 import { createBlobFromdataURI } from '../../services/dataTransformService';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import { Grid } from '@material-ui/core';
+import { Grid, Card, CardContent } from '@material-ui/core';
 
 
 export interface IProps {
   position?: string;
   showCamera: boolean;
 };
-
+const classCamera = "camera"
 const onTakePhoto = async (dataUri: any) => {
   const config = {
     sizeFactor: 1,
@@ -33,38 +33,45 @@ export default React.memo<IProps>((props: IProps) => {
   const height = 640; // 480
   const width = 480; // 640
   const css: CSSProperties = { width, height, overflow: "hidden" }
-  const [showCam, setShowCam] = useState(showCamera? 0: 1);
+  const [showCam, setShowCam] = useState(showCamera ? 0 : 1);
   return (
-    <Grid container={true} className="camera-container">
-      <Grid item={true} xs={12}>
-      <IconButton  color={isOpen(showCam) ? "secondary" : "primary" }  component="span" onClick={() => setShowCam(showCam + 1)} >
+    <>
+    {/* <IconButton color={isOpen(showCam) ? "secondary" : "primary"} component="span" onClick={() => setShowCam(showCam + 1)} >
           <PhotoCamera />
-        </IconButton>
-        </Grid>
-      {isOpen(showCam) &&
+        </IconButton> */}
+    <Grid container={true} className={`${classCamera}_container`}>
       <Grid item={true} xs={12}>
-        <div style={css}>
-          
-          <Camera
-            onTakePhoto={(dataUri: File) => { onTakePhoto(dataUri); }}
-            onCameraError={(error: any) => { onCameraError(error); }}
-            idealFacingMode={FACING_MODES.ENVIRONMENT}
-            idealResolution={{ width, height }}
-            imageType={IMAGE_TYPES.JPG}
-            imageCompression={0.97}
-            isMaxResolution={false}
-            isImageMirror={false}
-            isSilentMode={true}
-            isDisplayStartCameraError={true}
-            isFullscreen={false}
-            sizeFactor={1}
-            onCameraStart={(stream: any) => { onCameraStart(stream); }}
-            onCameraStop={() => { onCameraStop(); }}
-          />
-          
-        </div>
-        </Grid>}
+        
+      </Grid>
+      {showCamera &&
+        <Card className={`${classCamera}_on`}>
+          <CardContent>
+            <Grid item={true} xs={12}>
+              <div style={css}>
+
+                <Camera
+                  onTakePhoto={(dataUri: File) => { onTakePhoto(dataUri); }}
+                  onCameraError={(error: any) => { onCameraError(error); }}
+                  idealFacingMode={FACING_MODES.ENVIRONMENT}
+                  idealResolution={{ width, height }}
+                  imageType={IMAGE_TYPES.JPG}
+                  imageCompression={0.97}
+                  isMaxResolution={false}
+                  isImageMirror={false}
+                  isSilentMode={true}
+                  isDisplayStartCameraError={true}
+                  isFullscreen={false}
+                  sizeFactor={1}
+                  onCameraStart={(stream: any) => { onCameraStart(stream); }}
+                  onCameraStop={() => { onCameraStop(); }}
+                />
+
+              </div>
+            </Grid>
+          </CardContent>
+        </Card>}
     </Grid>
+    </>
   );
 });
 

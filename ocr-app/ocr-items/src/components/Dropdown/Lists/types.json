@@ -40,7 +40,7 @@
             "value": "fish",
             "label": "Fish",
             "time" : 5,
-            "tags" : ["fish", "mackerel","salmon", "harbour", "sea"]
+            "tags" : ["fish", "mackerel","salmon", "anchovies", "harbour", "sea"]
         }
     ],
     "dairy": [

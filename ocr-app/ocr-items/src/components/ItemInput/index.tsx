@@ -62,7 +62,6 @@ export default React.memo<IProps>((props: IProps) => {
   // Handle amount
   const [value, setValue] = React.useState<number>(props.item.amount);
 
-
   const handleInputChange = (event?: React.ChangeEvent<HTMLInputElement> | any, newValue?: number | number[]) => {
     let newAmount: number = 0;
     if (event && event.target && event.target.value) {
@@ -100,7 +99,6 @@ export default React.memo<IProps>((props: IProps) => {
         >
           <ListItemAvatar>
             <Avatar>
-              <KitchenIcon fontSize="inherit" />
               <small>{props.item.number}</small>
             </Avatar>
           </ListItemAvatar>
@@ -109,6 +107,7 @@ export default React.memo<IProps>((props: IProps) => {
             primary={`${props.item.name.toLocaleUpperCase()}`}
             secondary={`${date.substring(0, date.length - 12)} | ${props.item.type.toUpperCase()} `}
           />
+          {props.onDeleteHandle && <Button size="small" onClick={props.onDeleteHandle(props.item)}>Delete</Button>}
 
         </ExpansionPanelSummary>
 

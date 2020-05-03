@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { setNewEditableITems } from '../../store/form/actions';
 import { API_ENDPOINT, IItem } from "../../store/form/constants";
 import { IFileForm } from "../../store/file/constants";
 import ListItems from '../../components/ListItems';
 import UploadImage from '../../components/UploadImage';
 import { postImageFile } from '../../services/apiService';
-import TakePhoto from '../../components/TakePhoto';
-import { Card, CardContent, CardActions, CardHeader, IconButton, Avatar } from '@material-ui/core';
+import { Card, CardActions, CardHeader, IconButton } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import Calendar from '../../components/Calendar';
+import Header from '../../components/Header';
+import Empty from '../../components/Empty';
 
 type Props = IStateProps;
 
@@ -16,6 +18,7 @@ export interface IStateProps {
   itemsView: IItem[];
   itemsEdit: IItem[];
   hasUpdated?: boolean;
+
   fileFormValues: IFileForm;
 };
 
@@ -27,7 +30,6 @@ class FormPage extends React.Component<Props>  {
     console.log("Mounting ", this.props.itemsView, this.props.itemsEdit);
   }
 
-
   public render() {
     const {
       itemsView,
@@ -38,43 +40,63 @@ class FormPage extends React.Component<Props>  {
 
     console.log("Form Page itemsEdit", itemsEdit)
 
-    if (!itemsView || !itemsEdit) {
-      return <span>LOADING</span>;
-    }
+    
+
     return (
       <div>
+        <Header
+          title={"List of Items"}
+          subtitle={""}
+          icon={<ShoppingCartIcon
+            fontSize={"large"}
+          />}
+        />
         <Card>
           <CardHeader
             title={"All my items"}
             subheader={"Take or upload picture"}
             avatar={
-              <ShoppingCartIcon/>
-                }
+              <ShoppingCartIcon />
+            }
             action={
               <IconButton aria-label="settings">
                 <MoreVertIcon />
               </IconButton>}
           />
-          <CardContent>
-          <TakePhoto
-              showCamera={false}
-            />
-          </CardContent>
           <CardActions>
             <UploadImage
               onSelectHandle={onUploadImageHandle}
-            /> 
+            />
           </CardActions>
-
         </Card>
-        <ListItems
-          title={"Item List"}
-          items={itemsEdit}
-        />
+        {body(itemsView, itemsEdit)}
       </div>
     )
   }
 };
+
+const body = (itemsView: IItem[], itemsEdit: IItem[]) => {
+
+  if (!itemsView || !itemsEdit) {
+    return (<><h3>Item List</h3><Empty
+      message="LOADING"
+    /></>);
+  }
+
+  if (itemsView.length < 1 || itemsEdit.length < 1) {
+    return (<><h3>No Item List</h3><Empty
+      message="Nothing Listed"
+    /></>);
+  }
+
+  return (
+    <div>
+      <ListItems
+          title={"Item List"}
+          items={itemsEdit}
+        />
+    </div>)
+}
 
 
 const onUploadImageHandle = (event: React.FormEvent<HTMLInputElement | HTMLFormElement>) => {
