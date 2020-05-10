@@ -23,6 +23,7 @@ export enum ItemsTypeEnum {
     amount: number;
     number?: number;
     stored?: string;
+    packaging?:string;
   }
   export interface IAllItems {
     items: IItem[];

@@ -1,11 +1,15 @@
 import React from 'react';
-import Calendar from '../../components/Calendar';
 import Header from '../../components/Header';
-import DeleteIcon from '@material-ui/icons/Delete';
 import Empty from '../../components/Empty';
 import { IBins, IBin } from '../../store/bin/constants';
-import { List, ListItemText, ListItem, Paper, Divider } from '@material-ui/core';
-import { setNewEditableBin } from '../../store/bin/actions';
+import { List, ListItemText, ListItem, Paper, Divider, Card, CardHeader, CardActions, IconButton, Grid, Button } from '@material-ui/core';
+import { setNewEditableBin, editBinsPending, editBinsSuccess } from '../../store/bin/actions';
+
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+
+import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
 type Props = IBinProps;
 
@@ -26,9 +30,6 @@ class BinPage extends React.Component<Props>  {
       bins
     } = this.props;
 
-    console.log("Form Page itemsEdit", bins.items)
-
-
     return (
       <div>
         <Header
@@ -38,7 +39,30 @@ class BinPage extends React.Component<Props>  {
             fontSize={"large"}
           />}
         />
-        <Calendar />
+        <Card>
+          <CardHeader
+            title={"Empty all items"}
+            avatar={bins.items.length === 0 ? <DeleteOutlineIcon /> : <DeleteForeverIcon />}
+            action={
+              <IconButton aria-label="settings">
+                <MoreVertIcon />
+              </IconButton>}
+          />
+          <CardActions>
+            <Grid
+              container
+              direction={"row"}
+              spacing={2}>
+              <Grid item xs={6}>
+                <div>
+                  <Button component="span"
+                    onClick={emptyBin}>
+                    Empty</Button>
+                </div>
+              </Grid>
+            </Grid>
+          </CardActions>
+        </Card>
         <h3>Bin Items</h3>
         {body(bins)}
       </div>
@@ -63,24 +87,34 @@ const body = (bins: IBins) => {
 
   return (
     <Paper>
+
       <List >
         {bins.items.map(item => (listItem(item)))}
-
       </List>
     </Paper>)
 }
 
 const listItem = (item: IBin) => {
+  console.log("\n\npackaging", item.packaging, "\n\n\n" )
   return (
     <>
       <ListItem>
         <ListItemText
+          key={`${item.index}`}
           primary={`${item.name.toLocaleUpperCase()}`}
-          secondary={`${item.type.toUpperCase()} `}
+          secondary={`${item.type.toUpperCase()} | ${item.packaging ? item.packaging.toUpperCase() : ""} `}
         />
       </ListItem>
       <Divider />
     </>)
+}
+
+const emptyBin = () => {
+  editBinsPending();
+  editBinsSuccess({
+    items: [],
+    bins: []
+  });
 }
 
 export default BinPage;

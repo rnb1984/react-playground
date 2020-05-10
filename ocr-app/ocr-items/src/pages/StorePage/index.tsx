@@ -20,14 +20,10 @@ class StorePage extends React.Component<Props>  {
     setNewEditableStoreItems(this.props.stores.items);
   }
 
-
   public render() {
     const {
       stores
     } = this.props;
-
-    console.log("Form Page itemsEdit", stores.items)
-
 
     return (
       <div>

@@ -24,6 +24,7 @@ export interface IItemsState {
 
 
 export const viewReducer = (state: IAllItems = initialState, action: IActions): IAllItems => {
+  console.log("form/viewReducer");
   switch (action.type) {
     case ItemsTypeEnum.EDIT_ITEMS_SUCCESS:
       return {
@@ -38,6 +39,7 @@ export const viewReducer = (state: IAllItems = initialState, action: IActions): 
 
 export const editReducer = (state: IAllItems = initialState, action: IActions):
   IAllItems => {
+    console.log("form/editReducer");
   switch (action.type) {
     case ItemsTypeEnum.ADD_ITEMS:
       return {
@@ -64,10 +66,7 @@ export const editReducer = (state: IAllItems = initialState, action: IActions):
       };
 
     case ItemsTypeEnum.DELETE_ITEM:
-      console.log("removing", action.payload, state.items);
-      // const lessItems = removeItem(action.payload, state.items);
       const lessItems = removeItemByIndex(action.payload.index, state.items);
-      console.log("removed", action.payload, lessItems);
       return {
         items: lessItems.items
       };

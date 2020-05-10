@@ -78,7 +78,6 @@ function switchPages(event: ChangeEvent<{}>, value: string) {
 
 const storeListedItems = (itemsListed: IAllItems, stores: IStores) => (event: any) => {
     const newStores = addListItemsToStoreList(stores.items, itemsListed.items);
-    console.log("\n\n", newStores.length, "\n\n")
     editItemsPending();
     editStoreSuccess({ ...stores, items: newStores });
     editStoreItemsPending();
@@ -96,7 +95,6 @@ const addListItemsToStoreList = (stores: IStoredItem[], itemsListed: IItem[]) =>
             newStoreItems.push(stored);
             let removeItem = -1;
             itemsListed.forEach((item, j) => {
-                console.log("\n\ncompare", item.name.toLowerCase(), stored.name.toLowerCase(), "\n\n");
                 if (item.name.toLowerCase() === stored.name.toLowerCase()) {
                     newStoreItems[i] = { ...stored, number: stored.number + 1 };
                     removeItem = j;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { setNewEditableITems } from '../../store/form/actions';
 import { API_ENDPOINT, IItem } from "../../store/form/constants";
 import { IFileForm } from "../../store/file/constants";
@@ -8,7 +8,6 @@ import { postImageFile } from '../../services/apiService';
 import { Card, CardActions, CardHeader, IconButton } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import Calendar from '../../components/Calendar';
 import Header from '../../components/Header';
 import Empty from '../../components/Empty';
 
@@ -18,7 +17,6 @@ export interface IStateProps {
   itemsView: IItem[];
   itemsEdit: IItem[];
   hasUpdated?: boolean;
-
   fileFormValues: IFileForm;
 };
 
@@ -27,7 +25,6 @@ class FormPage extends React.Component<Props>  {
 
   public componentWillMount() {
     setNewEditableITems(this.props.itemsView);
-    console.log("Mounting ", this.props.itemsView, this.props.itemsEdit);
   }
 
   public render() {
@@ -37,10 +34,6 @@ class FormPage extends React.Component<Props>  {
       hasUpdated,
       fileFormValues
     } = this.props;
-
-    console.log("Form Page itemsEdit", itemsEdit)
-
-    
 
     return (
       <div>

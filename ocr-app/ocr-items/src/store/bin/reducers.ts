@@ -11,6 +11,7 @@ const initialState: IBins = {
 
 export const binReducer = (state: IBins = initialState, action: IActions):
   IBins => {
+  console.log("bin/binReducer", state, "\naction: ", action, "\n\n");
   switch (action.type) {
     case BinTypeEnum.SET_UP_EDIT_ITEMS:
       return {
@@ -22,9 +23,12 @@ export const binReducer = (state: IBins = initialState, action: IActions):
         ...state
       };
     case BinTypeEnum.ADD_ITEM:
-      const newBinItems:IBin [] = [];
+      const newBinItems: IBin[] = [];
+      const newBinItem: IBin = action.payload;
+      // Make sure index is not allready stoered
       state.items.forEach(item => newBinItems.push(item));
-      newBinItems.push(action.payload);
+      if (!includesItemByIndex(newBinItem, newBinItems))
+        newBinItems.push(action.payload);
       return {
         ...state,
         items: newBinItems
@@ -36,11 +40,21 @@ export const binReducer = (state: IBins = initialState, action: IActions):
       };
 
     case BinTypeEnum.DELETE_ITEM:
-      state.items.splice( state.items.indexOf(action.payload),1);
+      state.items.splice(state.items.indexOf(action.payload), 1);
       return {
         ...state,
       };
     default:
       return state;
   }
+}
+
+const includesItemByIndex = (itemIn: IBin, items: IBin[]) => {
+  let isIncluded: boolean = false;
+  items.forEach(item => {
+    if (item.index === itemIn.index)
+      isIncluded = true;
+  });
+  return isIncluded;
+
 }

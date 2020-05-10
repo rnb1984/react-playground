@@ -21,6 +21,7 @@ const initialState: IStores = {
 
 export const editStoredReducer = (state: IStores = initialState, action: IActions):
   IStores => {
+    console.log("stores/editStoredReducer");
   switch (action.type) {
     case StoredItemsTypeEnum.SET_UP_EDIT_ITEMS:
       return {

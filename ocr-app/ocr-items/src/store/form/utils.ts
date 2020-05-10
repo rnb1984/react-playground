@@ -22,7 +22,8 @@ export const creatNewItemsList = (listOfNames: string[]) => {
                 date: findTime(foundType, 0),
                 amount: 100,
                 number: 1,
-                stored: findStorage(foundType)
+                stored: findStorage(foundType),
+                packaging: ""
             });
         else
             newItems[nameIndex].number = newItems[nameIndex].number! + 1;
@@ -101,6 +102,7 @@ export const updateItemName = (propertyChange: string, item: IItem, existingItem
         case "number":
         case "amount":
         case "date":
+        case "packaging":
         default:
             newItems = changeItem(item, existingItems, newItems);
     }
@@ -132,7 +134,7 @@ export const removeItemByIndex = (index: string, existingItems: IItem[]) => {
 // Helpers for Updating Item
 const changeItem = (newItem: IItem, existingItems: IItem[], newItems: IItem[]) => {
     existingItems.forEach(item => {
-        console.log("indexs", item.index, newItem.index);
+        console.log("indexs", item.index, newItem.index, newItem);
         if (item.index === newItem.index)
             newItems.push({
                 ...newItem,

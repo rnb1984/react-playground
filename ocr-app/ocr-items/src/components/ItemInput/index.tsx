@@ -3,11 +3,9 @@ import React from 'react';
 import { IItem } from '../../store/form/constants';
 import Dropdown from '../Dropdown';
 import { dropdownTypesList } from '../Dropdown/Lists';
-import { Input, Slider, TextField, Button, Avatar, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanel, ExpansionPanelActions, Divider, ListItemAvatar, ListItemText, Grid, Paper, Typography } from '@material-ui/core';
-import KitchenIcon from '@material-ui/icons/Kitchen';
+import { Input, Slider, TextField, Button, Avatar, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanel, ExpansionPanelActions, Divider, ListItemAvatar, ListItemText, Grid } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { KeyboardDatePicker, } from '@material-ui/pickers';
-import RemoveShoppingCartIcon from '@material-ui/icons/RemoveShoppingCart';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
@@ -21,12 +19,19 @@ const options = [
 ];
 
 const foodOptons = dropdownTypesList().concat(options);
+const packagingOptons = [
+  { value: 'plastic bottle', label: 'Plastic Bottle' },
+  { value: 'plastic bag', label: 'Plastic Bag' },
+  { value: 'paper', label: 'Papper' },
+  { value: 'card', label: 'Card' },
+];
 
 
 interface IProps {
   item: IItem;
   onChangeNameHandle?: (item: IItem) => any;
   onChangeTypeHandle?: (item: IItem) => any;
+  onChangePackageHandle?: (item: IItem) => any;
   onChangeNumberHandle?: (item: IItem) => any;
   onDeleteHandle?: (item: IItem) => any;
 }
@@ -51,7 +56,6 @@ export default React.memo<IProps>((props: IProps) => {
 
     const diffTime = Math.abs(currDate.getTime() - (newDate ? newDate.getTime() : 0));
     const diffDays = Math.ceil(diffTime / (1000 * 3600 * 24));
-    console.log("\n\nDiff date", diffTime, diffDays, "\n\n");
     editItemSuccess("date", {
       ...props.item,
       date: diffDays
@@ -125,7 +129,7 @@ export default React.memo<IProps>((props: IProps) => {
                   onChange={props.onChangeNameHandle(props.item)}
                 />}
             </Grid>
-            <Grid item={true} xs={4}>
+            <Grid item={true} xs={2}>
               {props.onChangeNumberHandle &&
                 <TextField
                   fullWidth
@@ -136,7 +140,19 @@ export default React.memo<IProps>((props: IProps) => {
                 />}
 
             </Grid>
-            <Grid item={true} xs={8}>
+            <Grid item={true} xs={4}>
+              {props.onChangePackageHandle && <Dropdown
+                placeholder={"Packaging"}
+                required={true}
+                select={true}
+                options={packagingOptons}
+                name={"Name of DropDown"}
+                onChange={props.onChangePackageHandle(props.item)}
+                className={"dropdown"}
+              />}
+
+            </Grid>
+            <Grid item={true} xs={4}>
               {props.onChangeTypeHandle && <Dropdown
                 placeholder={"Type"}
                 required={true}
@@ -148,7 +164,7 @@ export default React.memo<IProps>((props: IProps) => {
               />}
 
             </Grid>
-            
+
             <Grid item={true} xs={6}>
               <FastfoodIcon />
               <Input
@@ -166,7 +182,7 @@ export default React.memo<IProps>((props: IProps) => {
                 }}
               />%
               </Grid>
-              <Grid item={true} xs={6}>
+            <Grid item={true} xs={6}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
 
                 <KeyboardDatePicker
@@ -188,8 +204,8 @@ export default React.memo<IProps>((props: IProps) => {
                 onChange={handleInputChange}
                 aria-labelledby="input-slider"
               />
-              </Grid>
             </Grid>
+          </Grid>
         </ExpansionPanelDetails>
 
         {/* Action Buttons */}

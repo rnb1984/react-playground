@@ -4,7 +4,7 @@ import { editItemSuccess, removeItems } from '../../store/form/actions';
 import ItemInput from '../ItemInput';
 import { timeTypeList } from '../Dropdown/Lists';
 import { findTime } from '../../store/form/utils';
-import {  List } from '@material-ui/core';
+import { List } from '@material-ui/core';
 import { showSnackbar } from '../../store/snackbar/actions';
 
 
@@ -25,16 +25,17 @@ export default React.memo<IProps>((props: IProps) => {
                 <h3>{title}</h3>
                 <List >
                     {items.map(item => (
-                                <ItemInput
-                                key={item.index}
-                                    item={item}
-                                    onChangeNameHandle={handleNameChange}
-                                    onChangeTypeHandle={handleTypeChange}
-                                    onChangeNumberHandle={handleNumberChange}
-                                    onDeleteHandle={onDeleteHandle}
-                                />
+                        <ItemInput
+                            key={item.index}
+                            item={item}
+                            onChangeNameHandle={handleNameChange}
+                            onChangeTypeHandle={handleTypeChange}
+                            onChangePackageHandle={handlePackageChange}
+                            onChangeNumberHandle={handleNumberChange}
+                            onDeleteHandle={onDeleteHandle}
+                        />
                     ))}
-                    </List> 
+                </List>
             </div>
         )
     } else {
@@ -72,6 +73,16 @@ const handleTypeChange = (item: IItem) => (event: React.ChangeEvent<HTMLInputEle
         });
 }
 
+const handlePackageChange = (item: IItem) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+
+    const newPackaging: string = event.target.value.toLowerCase();
+
+    editItemSuccess("packaging", {
+        ...item,
+        packaging: newPackaging
+    });
+}
+
 const handleNumberChange = (item: IItem) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     let newNumber = 0;
     if (event.target.value !== "")
@@ -86,5 +97,5 @@ const handleNumberChange = (item: IItem) => (event: React.ChangeEvent<HTMLInputE
 
 const onDeleteHandle = (item: IItem) => (event: React.MouseEvent<HTMLButtonElement>) => {
     removeItems(item);
-    showSnackbar("Successfully Delete: " + item.name.toUpperCase() );
+    showSnackbar("Successfully Delete: " + item.name.toUpperCase());
 }

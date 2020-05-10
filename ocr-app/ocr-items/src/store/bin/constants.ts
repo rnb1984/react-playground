@@ -15,6 +15,7 @@ export enum BinTypeEnum {
     type: string;
     number?: number;
     bin?: string;
+    packaging?:string;
   }
   export interface IBins {
     items: IBin [];

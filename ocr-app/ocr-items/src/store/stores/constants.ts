@@ -18,6 +18,7 @@ export enum StoredItemsTypeEnum {
     amount: number;
     number: number;
     stored: string;
+    packaging?:string;
   }
   export interface IStores {
     items: IStoredItem [];
