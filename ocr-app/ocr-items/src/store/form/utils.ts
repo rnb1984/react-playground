@@ -23,7 +23,7 @@ export const creatNewItemsList = (listOfNames: string[]) => {
                 amount: 100,
                 number: 1,
                 stored: findStorage(foundType),
-                packaging: ""
+                packaging: findPackage(foundType)
             });
         else
             newItems[nameIndex].number = newItems[nameIndex].number! + 1;
@@ -54,9 +54,7 @@ const findType = (name: string) => {
             if (names.includes(tag))
                 foundType = item.label;
         })
-    }
-    );
-    console.log("\n\nNAMES", names, foundType, "\n\n")
+    });
     return foundType;
 }
 
@@ -66,6 +64,25 @@ const findStorage = (newType: string) => {
         return "cupboard";
     else
         return "fridge";
+}
+
+// Find package
+const findPackage = (newType: string) => {
+    // packageList
+    switch (newType.toLowerCase()) {
+        case "milk":
+            return "plastic carton";
+        case "butter":
+            return "glass jar";
+        case "beef":
+        case "fish":
+        case "lamb":
+        case "poltuary":
+        case "pork":
+            return "plastic";
+        default:
+            return "unkown"
+    }
 }
 
 // find Items

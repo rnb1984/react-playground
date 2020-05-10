@@ -2,7 +2,7 @@
 import React from 'react';
 import { IItem } from '../../store/form/constants';
 import Dropdown from '../Dropdown';
-import { dropdownTypesList } from '../Dropdown/Lists';
+import { dropdownTypesList, packageList } from '../Dropdown/Lists';
 import { Input, Slider, TextField, Button, Avatar, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanel, ExpansionPanelActions, Divider, ListItemAvatar, ListItemText, Grid } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { KeyboardDatePicker, } from '@material-ui/pickers';
@@ -19,12 +19,7 @@ const options = [
 ];
 
 const foodOptons = dropdownTypesList().concat(options);
-const packagingOptons = [
-  { value: 'plastic bottle', label: 'Plastic Bottle' },
-  { value: 'plastic bag', label: 'Plastic Bag' },
-  { value: 'paper', label: 'Papper' },
-  { value: 'card', label: 'Card' },
-];
+const packagingOptons = packageList();
 
 
 interface IProps {

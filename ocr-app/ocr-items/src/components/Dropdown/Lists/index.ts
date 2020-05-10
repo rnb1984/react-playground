@@ -53,7 +53,7 @@ const createTimeTypeList = (existingList: any[], ttList: ITimeTypeValue[]) => {
 */
 interface ITagTypeValue {
     label: string,
-    tags: string []
+    tags: string[]
 }
 
 export const tagTypeList = () => {
@@ -78,11 +78,11 @@ const createTagTypeList = (existingList: any[], ttList: ITagTypeValue[]) => {
  * Dict of Types
 */
 interface IIndexedTypeDict {
-    [id: string ]: string
-} 
+    [id: string]: string
+}
 
 export const typeIndexedDict = () => {
-    const itDict: IIndexedTypeDict = createIndexedTypeDict(types.dairy, {"unknown": "Unknown" }, 1);
+    const itDict: IIndexedTypeDict = createIndexedTypeDict(types.dairy, { "unknown": "Unknown" }, 1);
     return createIndexedTypeDict(types.meat, itDict, types.dairy.length + 1);
 }
 
@@ -98,4 +98,20 @@ const createIndexedTypeDict = (existingList: any[], itDict: IIndexedTypeDict, in
 */
 export const storageDict = () => {
     return { 'fridge': 'Fridge', 'cupboard': 'Cupboard' };
+}
+
+
+/**
+ * Package List
+*/
+export const packageList = () => {
+    return [
+        { value: 'plastic bottle', label: 'Plastic Bottle' }, 
+        { value: 'plastic carton', label: 'Plastic Carton' },
+        { value: 'plastic bag', label: 'Plastic Bag' },
+        { value: 'plastic', label: 'Plastic' },
+        { value: 'glass jar', label: 'Glass Jar' },
+        { value: 'paper', label: 'Papper' },
+        { value: 'card', label: 'Card' },
+    ];
 }
