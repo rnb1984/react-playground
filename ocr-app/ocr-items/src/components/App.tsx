@@ -1,6 +1,7 @@
 import React from 'react';
 
 
+import HomePage from '../containers/HomeContainer';
 import FormPage from '../containers/FormContainer';
 import StorePage from '../containers/StoreContainer';
 import NavBar from '../containers/NavBarContainer';
@@ -16,6 +17,7 @@ import { createGenerateClassName, jssPreset, StylesProvider } from '@material-ui
 import Container from '@material-ui/core/Container';
 import { Route } from 'react-router';
 import Footer from './Footer';
+import { RoutesEnum } from './NavBar';
 
 
 
@@ -44,9 +46,10 @@ export class App extends React.Component<IProps> {
           <React.Fragment>
             <SnackBarMessage />
             <Container maxWidth="md">
-              <Route exact path="/" component={FormPage} />
-              <Route exact path="/store" component={StorePage} />
-              <Route exact path="/bin" component={BinPage} />
+              <Route exact path={RoutesEnum.HOME} component={HomePage} />
+              <Route exact path={RoutesEnum.ITEM} component={FormPage} />
+              <Route exact path={RoutesEnum.STORE} component={StorePage} />
+              <Route exact path={RoutesEnum.BIN} component={BinPage} />
               <Footer/>
               <NavBar />
             </Container>

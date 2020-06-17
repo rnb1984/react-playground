@@ -2,6 +2,7 @@
 import { StoredItemsTypeEnum } from "./constants";
 import { IActions } from '../index';
 import { IStores } from "./constants";
+import { setDateByDays } from "../form/utils";
 
 const initialState: IStores = {
   stores: ["fridge"],
@@ -10,7 +11,7 @@ const initialState: IStores = {
       index: "0",
       name: "intitial",
       type: "unknown",
-      date: 0,
+      date: setDateByDays(0),
       amount: 100,
       number: 1,
       stored: "fridge"

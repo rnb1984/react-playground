@@ -10,7 +10,7 @@ const initialState: IAllItems = {
       index: "0",
       name: "intitial",
       type: "unknown",
-      date: 0,
+      date: new Date(),
       amount: 100,
       number: 1
     }

@@ -10,6 +10,7 @@ import FastfoodIcon from '@material-ui/icons/Fastfood';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { editItemSuccess } from '../../store/form/actions';
+import { setDateByDays, dayDifferance } from '../../store/form/utils';
 
 
 const options = [
@@ -32,8 +33,7 @@ interface IProps {
 }
 
 export default React.memo<IProps>((props: IProps) => {
-  const currDate: Date = new Date();
-  currDate.setDate(currDate.getDate() + props.item.date);
+  const currDate: Date = props.item.date;
   const date = currDate.toUTCString();
 
   // Handle expansion open close
@@ -49,11 +49,10 @@ export default React.memo<IProps>((props: IProps) => {
   const handleDateChange = (newDate: Date | null) => {
     setSelectedDate(newDate);
 
-    const diffTime = Math.abs(currDate.getTime() - (newDate ? newDate.getTime() : 0));
-    const diffDays = Math.ceil(diffTime / (1000 * 3600 * 24));
+    const diffDays = dayDifferance(currDate, newDate);
     editItemSuccess("date", {
       ...props.item,
-      date: diffDays
+      date: setDateByDays(diffDays)
     });
   };
 
@@ -85,8 +84,6 @@ export default React.memo<IProps>((props: IProps) => {
 
   return (
     <div>
-
-
       <ExpansionPanel
         key={props.item.index}
         expanded={expanded === `panel-${props.item.index}`}

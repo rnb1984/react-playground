@@ -34,10 +34,15 @@ export const creatNewItemsList = (listOfNames: string[]) => {
 
 // Find Time
 export const findTime = (newType: string, defaultTime: number) => {
-    let timeFound = defaultTime;
+    const defaultDay: Date = setDateByDays(defaultTime);
+    let timeFound = defaultDay;
+    
     timeTypeList().forEach(timeType => {
-        if (timeType.label.toLowerCase() === newType.toLowerCase())
-            timeFound = timeType.value
+        if (timeType.label.toLowerCase() === newType.toLowerCase()){
+            const newDate = new Date();
+            newDate.setDate(newDate.getDate() + timeType.value);
+            timeFound = newDate;
+        }
     });
     return timeFound;
 }
@@ -162,4 +167,16 @@ const changeItem = (newItem: IItem, existingItems: IItem[], newItems: IItem[]) =
             });
     });
     return newItems;
+}
+
+
+export const setDateByDays = (days: number) => {
+    const date1: Date = new Date();
+    const newTime = Math.abs(date1.getTime() + (days * 8.64e+7));
+    return new Date(newTime);
+}
+
+export const dayDifferance = (date1: Date, date2: Date | null) => {
+    const diffTime = Math.abs(date1.getTime() - (date2 ? date2.getTime() : 0));
+    return Math.ceil(diffTime / (1000 * 3600 * 24));
 }

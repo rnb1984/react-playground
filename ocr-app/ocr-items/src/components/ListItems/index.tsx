@@ -3,7 +3,7 @@ import { IItem } from "../../store/form/constants";
 import { editItemSuccess, removeItems } from '../../store/form/actions';
 import ItemInput from '../ItemInput';
 import { timeTypeList } from '../Dropdown/Lists';
-import { findTime } from '../../store/form/utils';
+import { findTime, setDateByDays } from '../../store/form/utils';
 import { List } from '@material-ui/core';
 import { showSnackbar } from '../../store/snackbar/actions';
 
@@ -57,10 +57,11 @@ const handleNameChange = (item: IItem) => (event: React.ChangeEvent<HTMLInputEle
 const handleTypeChange = (item: IItem) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 
     const newType: string = event.target.value.toLowerCase();
+    const defaultDays = 10000;
+    const defaultDate = setDateByDays(defaultDays);
+    const newTime = findTime(newType, defaultDays);
 
-    const newTime = findTime(newType, 10000);
-
-    if (newTime !== 10000)
+    if (newTime.getDate() !== defaultDate.getDate())
         editItemSuccess("date", {
             ...item,
             type: newType,

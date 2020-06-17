@@ -19,7 +19,7 @@ export enum ItemsTypeEnum {
     index: string;
     name: string;
     type: string;
-    date: number;
+    date: Date;
     amount: number;
     number?: number;
     stored?: string;

@@ -8,6 +8,7 @@ import { tableIcons } from './constants';
 import { IStoredItem } from '../../store/stores/constants';
 import { editStoreItemsSuccess, editStoreItemsPending } from '../../store/stores/actions';
 import { addBinSuccess, editBinsPending } from '../../store/bin/actions';
+import { setDateByDays, dayDifferance } from '../../store/form/utils';
 
 
 interface IRow {
@@ -118,13 +119,15 @@ const handleUpdateRow = (data: IRow[]) => {
 
 const convertDataToItems = (data: IRow[]) => {
     const items: IStoredItem[] = []
+    
     // set default if none exsits
     data.forEach((d, i) => {
+        console.log("\n\nnew Date: ", d.date, setDateByDays(d.date),"\n\n");
         items.push({
             index: (d.index) ? d.index : ("" + i),
             name: (d.name && d.name !== "") ? d.name : "unknown",
             type: (d.type && d.type !== "") ? d.type : "unknown",
-            date: d.date ? d.date : 0,
+            date: d.date ? setDateByDays(d.date) : new Date(),
             amount: d.amount ? d.amount : 100,
             number: d.total ? d.total : 1,
             stored: d.storeLocation ? d.storeLocation : "fridge",
@@ -139,11 +142,12 @@ export const createTableState = (items: IItem[] | IStoredItem[]): ITableState =>
 
     const dataIn: IRow[] = [];
     items.forEach(item => {
+        console.log("\n\ncreateTableState Date: ", item.date, dayDifferance(new Date(), item.date),"\n\n");
         dataIn.push({
             index: item.index,
             name: item.name,
             type: item.type,
-            date: item.date,
+            date: dayDifferance(new Date(), item.date),
             storeLocation: item.stored ? item.stored : "fridge",
             amount: item.amount,
             total: item.number ? item.number : 0,

@@ -187,7 +187,6 @@ function handleOnChange(onChange?: (event: ChangeEvent<HTMLInputElement | HTMLSe
                 value: (selected as any).value,
             }
         }
-
         onChange(event as ChangeEvent<HTMLInputElement | HTMLSelectElement>)
     }
 }

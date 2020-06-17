@@ -24,14 +24,11 @@ interface IProps {
 }
 
 export default React.memo<IProps>((props: IProps) => {
-  const currDate: Date = new Date();
-  currDate.setDate(currDate.getDate() + props.item.date);
-
   return (
     <Card>
       <CardHeader
       title={props.item.name}
-      subheader={currDate.toUTCString()}
+      subheader={props.item.date.toUTCString()}
       action={
         <IconButton aria-label="settings">
           <MoreVertIcon />
@@ -51,7 +48,7 @@ export default React.memo<IProps>((props: IProps) => {
             type="text"
             onChange={props.onChangeNameHandle(props.item)}
           />}
-        <small>type: {props.item.type}  {props.item.number && "| number of item:" + props.item.number} amount: {props.item.amount} date: {currDate.toUTCString()} </small>
+        <small>type: {props.item.type}  {props.item.number && "| number of item:" + props.item.number} amount: {props.item.amount} date: {props.item.date.toUTCString()} </small>
         <br />
         {props.onChangeNumberHandle && <input type="text" value={props.item.number} onChange={props.onChangeNumberHandle(props.item)} />}
         {props.onChangeTypeHandle && <Dropdown

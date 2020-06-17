@@ -28,13 +28,15 @@ interface INavMenu { value: string, label: string };
 
 const className = "navbar";
 
-enum RoutesEnum {
+export enum RoutesEnum {
     HOME = "/",
+    ITEM = "/item",
     STORE = "/store",
     BIN = "/bin"
-}
+};
 
 const homeTabs: INavMenu[] = [{ value: RoutesEnum.HOME, label: "Home" },
+                                { value: RoutesEnum.ITEM, label: "Item" },
                                 { value: RoutesEnum.STORE, label: "Store" },
                                 { value: RoutesEnum.BIN, label: "Bin" }]
 

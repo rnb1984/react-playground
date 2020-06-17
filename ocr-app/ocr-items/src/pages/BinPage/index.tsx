@@ -41,7 +41,7 @@ class BinPage extends React.Component<Props>  {
         />
         <Card>
           <CardHeader
-            title={"Empty all items"}
+            title={bins.items.length === 0 ? "No Items" :  "Empty all " + bins.items.length + " items" }
             avatar={bins.items.length === 0 ? <DeleteOutlineIcon /> : <DeleteForeverIcon />}
             action={
               <IconButton aria-label="settings">
